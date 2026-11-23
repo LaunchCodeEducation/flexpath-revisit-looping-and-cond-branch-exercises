@@ -1,4 +1,17 @@
-// Use this for testing
+// Exercise 9: invertBooleanProperties - flip every boolean,
+// recursing into nested objects
+
+function invertBooleanProperties(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] === "boolean") {
+      obj[key] = !obj[key];
+    } else if (typeof obj[key] === "object" && obj[key] !== null) {
+      invertBooleanProperties(obj[key]);
+    }
+  }
+}
+
+// Testing
 const settings = {
   darkMode: true,
   notifications: false,
@@ -8,10 +21,7 @@ const settings = {
   },
 };
 
-// Result if function works correctly
-// Outputs:
-// {
-//   darkMode: false,
-//   notifications: true,
-//   preferences: { autoSave: false, sync: true }
-// }
+invertBooleanProperties(settings);
+console.log(settings);
+// { darkMode: false, notifications: true,
+//   preferences: { autoSave: false, sync: true } }
